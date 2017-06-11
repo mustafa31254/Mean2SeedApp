@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthComponent implements OnInit {
 
-  constructor() { }
+  constructor(private AS:AuthService) { }
 
   ngOnInit() {
   }
+  // logOut(){
+  //   this.AS.logOut();
+  // }
 
 }

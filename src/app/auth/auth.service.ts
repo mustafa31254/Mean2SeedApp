@@ -37,7 +37,13 @@ return this.http.post('http://localhost:3000/users/register', body,{headers:head
                     .map((response:Response)=>response.json())
                     .catch((error:Response)=>Observable.throw(error.json()));
   }
+logOut(){
+  localStorage.clear();
+}
 
+isLoggedIn(){
+  return localStorage.getItem('token')!==null;
+}
 
 
 //  private extractData(res: Response) {
