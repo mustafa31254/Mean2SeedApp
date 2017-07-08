@@ -1,0 +1,9 @@
+.backDrop{
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  height: 100%;
+  width: 100vh;
+  left: 0%;
+  top: 0%;
+
+}

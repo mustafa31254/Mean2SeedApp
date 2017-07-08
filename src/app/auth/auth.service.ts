@@ -1,41 +1,47 @@
 import { User } from './../Models/UserModel';
-import { Injectable,Inject } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http, Response, Headers ,RequestOptions} from '@angular/http';
 import 'rxjs/Rx';
-import{Observable} from 'rxjs/Observable';
+
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { ErrorService } from 'app/error/error.service';
 
 
 
 @Injectable()
 export class AuthService {
 
-  constructor(private http:Http) { }
+  constructor(private http:Http,private ErService: ErrorService) { }
 
-register(user:User){
-  const body=JSON.stringify(user);
-  
-  //const headers= new Headers({'Content-Type': 'application/json'});
+register(user: User) {
+  const body = JSON.stringify(user);
+
  const headers = new Headers({ 'Content-Type': 'application/json' });
-    
 
 
-return this.http.post('http://localhost:3000/users/register', body,{headers:headers})
-.map( (response:Response)=>response.json())
-.catch((error:Response)=>Observable.throw(
-  error.json()
-) )
+
+return this.http.post('http://localhost:3000/users/register', body, { headers : headers})
+.map( (response: Response) => response.json())
+.catch((error: Response) => {
+this.ErService.getError(error.json());
+  return Observable.throw(error.json());
+}
+  )
 }
 
- login(user: User){
-    const body=JSON.stringify(user);
+ login(user: User) {
+    const body = JSON.stringify(user);
     // let userUrl='http://localhost:3000/users/register';
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http.post('http://localhost:3000/users/login', body , options)
-                    .map((response:Response)=>response.json())
-                    .catch((error:Response)=>Observable.throw(error.json()));
+                    .map((response: Response) => response.json())
+                    .catch((error: Response) => {
+                     this.ErService.getError(error.json());
+                      return Observable.throw(error.json());
+                    });
   }
 logOut(){
   localStorage.clear();

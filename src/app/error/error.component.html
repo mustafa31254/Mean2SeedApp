@@ -1,0 +1,39 @@
+<!--<div class="backDrop" [style.display]="show"></div>
+<div class="modal" [style.display]="show">
+  <div class="modal-dialog" role="dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{error?.title}}</h5>
+        <button type="button" class="close" (click)='onErrorHandled()' aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{error?.message}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)='onErrorHandled()'>Close</button>
+      </div>
+    </div>
+  </div>
+</div>-->
+<div class="backDrop"[ngStyle]="{'display': show}"></div>
+<div class="modal" [ngStyle]="{'display': show}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{error?.title}}</h5>
+        <button type="button" class="close" (click)='onErrorHandled()' aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{error?.message}}</p>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary" (click)='onErrorHandled()'>Close</button>
+      </div>
+    </div>
+  </div>
+</div>

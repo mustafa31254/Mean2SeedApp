@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../auth.service';
 import { User } from './../../Models/UserModel';
 import { Component, OnInit } from '@angular/core';
@@ -27,12 +28,13 @@ createLoginForm(){
 onSubmit(){
 console.log(this.loginForm.get('email').value);
  const user= new User(this.loginForm.get('email').value,this.loginForm.get('password').value );
-  
+
   this.AS.login(user).subscribe(data=>{
     localStorage.setItem('token',data.token);
     localStorage.setItem('userId',data.userId);
-    
+
   },error=>console.error(error))
+this.loginForm.reset();
 
 }
 
