@@ -1,7 +1,12 @@
 
 var mongoose= require('mongoose');
+mongoose.Promise = require('bluebird');
+
 var Schema=mongoose.Schema;
-mongoose.connect("mongodb://localhost/MeanApp");
+
+mongoose.connect("mongodb://localhost/MeanApp",{
+  useMongoClient: true 
+});
 //var bcrypt=require('bcryptjs');
 var mongooseUniqueValidator=require('mongoose-unique-validator');
 var userSchema=  new Schema({

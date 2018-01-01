@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { AuthService } from './../auth.service';
 import { User } from './../../Models/UserModel';
 import { Component, OnInit } from '@angular/core';
@@ -12,9 +12,14 @@ import { FormGroup,FormBuilder,Validators} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 loginForm:FormGroup;
-  constructor(private fb:FormBuilder,private AS:AuthService ) { }
+returnUrl: string;
+
+  constructor(private fb:FormBuilder,private AS:AuthService,private route: ActivatedRoute,
+    private router: Router, ) { }
 
   ngOnInit() {
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
 this.createLoginForm()
   }
@@ -30,6 +35,7 @@ console.log(this.loginForm.get('email').value);
  const user= new User(this.loginForm.get('email').value,this.loginForm.get('password').value );
 
   this.AS.login(user).subscribe(data=>{
+    this.router.navigate([this.returnUrl]);
     localStorage.setItem('token',data.token);
     localStorage.setItem('userId',data.userId);
 

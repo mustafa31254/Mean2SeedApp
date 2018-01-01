@@ -1,6 +1,9 @@
 var mongoose= require('mongoose');
 var Schema=mongoose.Schema;
-mongoose.connect("mongodb://localhost/MeanApp");
+mongoose.Promise = require('bluebird');
+mongoose.connect("mongodb://localhost/MeanApp",{
+  useMongoClient: true 
+});
 //var bcrypt=require('bcryptjs');
 var productSchema=  new Schema({
        name:{type:String,require:true},
